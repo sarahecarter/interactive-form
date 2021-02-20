@@ -4,8 +4,9 @@ let otherJobInput = document.getElementById('other-job-role');
 const jobSelect = document.getElementById('title');
 const colorSelect = document.getElementById('color');
 const designSelect = document.getElementById('design');
-const jsPuns = document.querySelectorAll('option[data-theme="js puns"]');
-const heartJS = document.querySelectorAll('option[data-theme="heart js"]');
+const activitiesFieldset = document.getElementById('activities');
+const totalCostP = document.getElementById('activities-cost');
+let cost = 0;
 
 
 //* Name Section *//
@@ -39,6 +40,7 @@ designSelect.addEventListener('change', () => {
     // Disable color options for tshirts
     for (let i = 0; i < colorSelect.children.length; i++) {
         let dataTheme = colorSelect.children[i].getAttribute('data-theme');
+        //if the the selected matches the option, display the option
         if (dataTheme == designValue) {
             colorSelect.children[i].hidden = false;
             colorSelect.children[i].selected = true;
@@ -47,4 +49,21 @@ designSelect.addEventListener('change', () => {
             colorSelect.children[i].selected = false; 
         } 
     }
+})
+
+//* Register for Activities Section *//
+// Adds an event listener to listen for changes on activities <fieldset>
+activitiesFieldset.addEventListener('change', (e) => {
+    //variable for activity cost 
+    let activityPrice = parseInt(e.target.getAttribute('data-cost'));
+    //if an activity is checked add price to cost
+    if (e.target.checked) {
+        cost = cost + activityPrice;
+    } 
+    //if an activity is unchecked subtract price from cost
+    else  {
+        cost = cost - activityPrice;
+    }
+    //update p element to reflect total cost
+    totalCostP.innerHTML = `Total Price: $${cost}`
 })
