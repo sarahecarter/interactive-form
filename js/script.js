@@ -1,5 +1,7 @@
 //Variables
+const form = document.querySelector('form');
 const nameInput = document.getElementById('name');
+const emailInput = document.getElementById('email');
 let otherJobInput = document.getElementById('other-job-role');
 const jobSelect = document.getElementById('title');
 const colorSelect = document.getElementById('color');
@@ -10,8 +12,12 @@ let cost = 0;
 const paymentSelect = document.getElementById('payment');
 const creditCardOption = document.querySelector('option[value="credit-card"]');
 const creditCard = document.getElementById('credit-card');
+const cardNumberInput = document.getElementById('cc-num');
+const zipCodeInput = document.getElementById('zip');
+const cvvInput = document.getElementById('cvv');
 const payPal = document.getElementById('paypal');
 const bitcoin = document.getElementById('bitcoin');
+
 
 
 //* Name Section *//
@@ -71,6 +77,7 @@ activitiesFieldset.addEventListener('change', (e) => {
     }
     //update p element to reflect total cost
     totalCostP.innerHTML = `Total Price: $${cost}`
+    return cost;
 })
 
 //* Payment Info Section *//
@@ -96,4 +103,76 @@ paymentSelect.addEventListener('change', (e) => {
         bitcoin.hidden = true;
         payPal.hidden = true;
     }
+})
+
+// Helper Functions //
+function validateName () {
+    let nameValue = nameInput.value;
+    let nameTest = /^[a-zA-Z]+$/gm.test(nameValue);
+    return nameTest;
+}
+
+function validateEmail () {
+    let emailValue = emailInput.value;
+    let emailTest = /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailValue);
+    return emailTest;
+}
+
+function validateCardNumber () {
+    let cardNumberValue = cardNumberInput.value;
+    let cardNumberTest = /^[0-9]{13,16}$/.test(cardNumberValue);
+    return cardNumberTest;
+}
+
+function validateZip () {
+    let zipValue = zipCodeInput.value;
+    let zipTest = /^[0-9]{5}$/.test(zipValue);
+    return zipTest;
+}
+
+function validateCVV () {
+    let cvvValue = cvvInput.value;
+    let cvvTest = /^[0-9]{3}$/.test(cvvValue);
+    return cvvTest;
+}
+
+
+//* Form Validation *//
+// Adds an event listener to the form
+form.addEventListener('submit', (e) => {
+    //validate name
+    if (!validateName()) {
+        e.preventDefault();
+    }
+    
+    //validate email
+    if (!validateEmail) {
+        e.preventDefault();
+    }
+
+    //make sure activity is checked
+    if (cost == 0) {
+        e.preventDefault();
+    }
+
+    //if credit card is selected vaildate card 
+    if (creditCardOption.selected = true) {
+        //validate card number
+
+        if(!validateCardNumber()) {
+            e.preventDefault();
+        }
+
+        //validate zip code
+        if(!validateZip()) {
+            e.preventDefault();
+        }
+        
+        //validate cvv
+        if (!validateCVV()) {
+            e.preventDefault();
+        }
+    
+    }
+
 })
