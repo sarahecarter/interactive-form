@@ -7,6 +7,11 @@ const designSelect = document.getElementById('design');
 const activitiesFieldset = document.getElementById('activities');
 const totalCostP = document.getElementById('activities-cost');
 let cost = 0;
+const paymentSelect = document.getElementById('payment');
+const creditCardOption = document.querySelector('option[value="credit-card"]');
+const creditCard = document.getElementById('credit-card');
+const payPal = document.getElementById('paypal');
+const bitcoin = document.getElementById('bitcoin');
 
 
 //* Name Section *//
@@ -66,4 +71,29 @@ activitiesFieldset.addEventListener('change', (e) => {
     }
     //update p element to reflect total cost
     totalCostP.innerHTML = `Total Price: $${cost}`
+})
+
+//* Payment Info Section *//
+// Credit card should be selected by default
+creditCardOption.selected = true;
+payPal.hidden = true;
+bitcoin.hidden = true;
+
+// Adds an event listener for payment fieldset
+paymentSelect.addEventListener('change', (e) => {
+    if (e.target.value == "paypal") {
+        payPal.hidden = false;
+        creditCard.hidden = true;
+        bitcoin.hidden = true;
+    }
+    else if (e.target.value == "bitcoin") {
+        bitcoin.hidden = false;
+        creditCard.hidden = true;
+        payPal.hidden = true;
+    }
+    else if (e.target.value == "credit-card") {
+        creditCard.hidden = false;
+        bitcoin.hidden = true;
+        payPal.hidden = true;
+    }
 })
