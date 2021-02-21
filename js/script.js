@@ -2,6 +2,7 @@
 const form = document.querySelector('form');
 const nameInput = document.getElementById('name');
 const emailInput = document.getElementById('email');
+let emailHint = document.getElementById('email-hint');
 let otherJobInput = document.getElementById('other-job-role');
 const jobSelect = document.getElementById('title');
 const colorSelect = document.getElementById('color');
@@ -174,11 +175,17 @@ paymentSelect.addEventListener('change', (e) => {
 // Helper Functions //
 function validateName () {
     let nameValue = nameInput.value;
-    let nameTest = /^[a-zA-Z]+$/gm.test(nameValue);
+    let nameTest = /[a-zA-Z]+\s[a-zA-Z]+|[a-zA-Z]+/gm.test(nameValue);
     return nameTest;
 }
 
 function validateEmail () {
+    if (emailInput.value == '') {
+        emailHint.innerHTML = `Email field cannot be left blank`;
+    }
+    else {
+        emailHint.innerHTML = `Email address must be formatted correctly`;
+    }
     let emailValue = emailInput.value;
     let emailTest = /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailValue);
     return emailTest;
