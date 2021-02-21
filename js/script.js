@@ -7,6 +7,8 @@ const jobSelect = document.getElementById('title');
 const colorSelect = document.getElementById('color');
 const designSelect = document.getElementById('design');
 const activitiesFieldset = document.getElementById('activities');
+let activitiesHint = document.getElementById('activities-hint');
+const checkBoxes = document.querySelectorAll('input[type="checkbox"]');
 const totalCostP = document.getElementById('activities-cost');
 let cost = 0;
 const paymentSelect = document.getElementById('payment');
@@ -80,6 +82,16 @@ activitiesFieldset.addEventListener('change', (e) => {
     return cost;
 })
 
+// Loops through checkboxes and listens for focus and blur events
+for (let i = 0; i < checkBoxes.length; i++) {
+    checkBoxes[i].addEventListener('focus', (e) => {
+        e.target.parentElement.classList.add('focus');
+    })
+    checkBoxes[i].addEventListener('blur', (e) => {
+        e.target.parentElement.classList.remove('focus');
+    })
+}
+
 //* Payment Info Section *//
 // Credit card should be selected by default
 creditCardOption.selected = true;
@@ -136,6 +148,18 @@ function validateCVV () {
     return cvvTest;
 }
 
+function validationFailed (child) {
+    child.parentElement.classList.add('not-valid');
+    child.parentElement.classList.remove('valid');
+    child.nextElementSibling.style.display = 'block';
+}
+
+function validationPassed (child) {
+    child.parentElement.classList.add('valid');
+    child.parentElement.classList.remove('not-valid');
+    child.nextElementSibling.style.display = 'none';
+}
+
 
 //* Form Validation *//
 // Adds an event listener to the form
@@ -143,16 +167,28 @@ form.addEventListener('submit', (e) => {
     //validate name
     if (!validateName()) {
         e.preventDefault();
-    }
+        validationFailed(nameInput);
+    } 
+    else {validationPassed(nameInput)}
     
     //validate email
-    if (!validateEmail) {
+    if (!validateEmail()) {
         e.preventDefault();
+        validationFailed(emailInput);
     }
+    else {validationPassed(emailInput)}
 
     //make sure activity is checked
     if (cost == 0) {
         e.preventDefault();
+        activitiesFieldset.classList.add('not-valid');
+        activitiesFieldset.classList.remove('valid');
+        activitiesHint.style.display = "block";
+    }
+    else {
+        activitiesFieldset.classList.add('valid');
+        activitiesFieldset.classList.remove('not-valid');
+        activitiesHint.style.display = "none";
     }
 
     //if credit card is selected vaildate card 
@@ -161,17 +197,23 @@ form.addEventListener('submit', (e) => {
 
         if(!validateCardNumber()) {
             e.preventDefault();
+            validationFailed(cardNumberInput);
         }
+        else {validationPassed(cardNumberInput)}
 
         //validate zip code
         if(!validateZip()) {
             e.preventDefault();
+            validationFailed(zipCodeInput);
         }
+        else {validationPassed(zipCodeInput)}
         
         //validate cvv
         if (!validateCVV()) {
             e.preventDefault();
+            validationFailed(cvvInput);
         }
+        else {validationPassed(cvvInput)}
     
     }
 
