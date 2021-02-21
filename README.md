@@ -9,3 +9,7 @@ Added original JavaScript to provided HTML and CSS files to make the form more u
 Goals:
 -Adding customized and conditional behavior and interactivity
 -Validating user input and providing helpful error messages when the user enters invalid information into the form fields.
+
+Extra Credit Features:
+-Prevent users from registering for conflicting activities by comparing selected activity with the time and day data of other activities in a loop
+-Keyup event listeners on required input fields (name, email, card number, card zipcode, and card cvv) look for changes as the user types in field and validates using Regex in real time

@@ -8,6 +8,7 @@ const colorSelect = document.getElementById('color');
 const designSelect = document.getElementById('design');
 const activitiesFieldset = document.getElementById('activities');
 let activitiesHint = document.getElementById('activities-hint');
+const activityTimes = document.querySelectorAll('input[data-day-and-time]');
 const checkBoxes = document.querySelectorAll('input[type="checkbox"]');
 const totalCostP = document.getElementById('activities-cost');
 let cost = 0;
@@ -22,10 +23,25 @@ const bitcoin = document.getElementById('bitcoin');
 
 
 
+
 //* Name Section *//
 // When the page first loads, 
 // the first text field should have the focus state by default
 nameInput.focus();
+nameInput.addEventListener('keyup', () => {
+    if (!validateName()) {
+        validationFailed(nameInput);
+    } 
+    else {validationPassed(nameInput)}
+});
+
+//* Email Section *//
+emailInput.addEventListener('keyup', () => {
+    if (!validateEmail()) {
+        validationFailed(emailInput);
+    } 
+    else {validationPassed(emailInput)}
+});
 
 //* Job Role Section *//
 // Hide the "text field" with the id of "other-job-role" 
@@ -69,16 +85,33 @@ designSelect.addEventListener('change', () => {
 activitiesFieldset.addEventListener('change', (e) => {
     //variable for activity cost 
     let activityPrice = parseInt(e.target.getAttribute('data-cost'));
-    //if an activity is checked add price to cost
+    //get day and time of checked event
+    let scheduledTime = e.target.getAttribute('data-day-and-time');
+    //if an activity is checked add price to cost and compare times
     if (e.target.checked) {
         cost = cost + activityPrice;
+        for (let i = 0; i < activityTimes.length; i++) {
+            if (scheduledTime == activityTimes[i].getAttribute('data-day-and-time') && activityTimes[i] != e.target) {
+                activityTimes[i].parentElement.classList.add('disabled');
+                activityTimes[i].disabled = true;
+            }
+        }
     } 
-    //if an activity is unchecked subtract price from cost
+    // else if an activity is unchecked subtract price from cost or enable other activities
     else  {
         cost = cost - activityPrice;
+        for (let i = 0; i < activityTimes.length; i++) {
+            if (scheduledTime == activityTimes[i].getAttribute('data-day-and-time') && activityTimes[i] != e.target) {
+                activityTimes[i].parentElement.classList.remove('disabled');
+                activityTimes[i].disabled = false;
+            }
+        }
     }
     //update p element to reflect total cost
     totalCostP.innerHTML = `Total Price: $${cost}`
+    
+
+
     return cost;
 })
 
@@ -97,6 +130,27 @@ for (let i = 0; i < checkBoxes.length; i++) {
 creditCardOption.selected = true;
 payPal.hidden = true;
 bitcoin.hidden = true;
+
+cardNumberInput.addEventListener('keyup', () => {
+    if (!validateCardNumber()) {
+        validationFailed(cardNumberInput);
+    } 
+    else {validationPassed(cardNumberInput)}
+});
+
+zipCodeInput.addEventListener('keyup', () => {
+    if (!validateZip()) {
+        validationFailed(zipCodeInput);
+    } 
+    else {validationPassed(zipCodeInput)}
+});
+
+cvvInput.addEventListener('keyup', () => {
+    if (!validateCVV()) {
+        validationFailed(cvvInput);
+    } 
+    else {validationPassed(cvvInput)}
+});
 
 // Adds an event listener for payment fieldset
 paymentSelect.addEventListener('change', (e) => {
