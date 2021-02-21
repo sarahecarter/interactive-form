@@ -29,6 +29,7 @@ const bitcoin = document.getElementById('bitcoin');
 // When the page first loads, 
 // the first text field should have the focus state by default
 nameInput.focus();
+// Adds key up event listeners for live validation
 nameInput.addEventListener('keyup', () => {
     if (!validateName()) {
         validationFailed(nameInput);
@@ -37,6 +38,7 @@ nameInput.addEventListener('keyup', () => {
 });
 
 //* Email Section *//
+// Adds key up event listener for live validation
 emailInput.addEventListener('keyup', () => {
     if (!validateEmail()) {
         validationFailed(emailInput);
@@ -132,6 +134,7 @@ creditCardOption.selected = true;
 payPal.hidden = true;
 bitcoin.hidden = true;
 
+// Adds key up event listeners for live validation
 cardNumberInput.addEventListener('keyup', () => {
     if (!validateCardNumber()) {
         validationFailed(cardNumberInput);
@@ -154,6 +157,7 @@ cvvInput.addEventListener('keyup', () => {
 });
 
 // Adds an event listener for payment fieldset
+// Checks which payment option is selected and hides others
 paymentSelect.addEventListener('change', (e) => {
     if (e.target.value == "paypal") {
         payPal.hidden = false;
@@ -180,6 +184,7 @@ function validateName () {
 }
 
 function validateEmail () {
+    //also changes hint based on input provided
     if (emailInput.value == '') {
         emailHint.innerHTML = `Email field cannot be left blank`;
     }
@@ -239,7 +244,7 @@ form.addEventListener('submit', (e) => {
     }
     else {validationPassed(emailInput)}
 
-    //make sure activity is checked
+    //make sure activity is checked and validate
     if (cost == 0) {
         e.preventDefault();
         activitiesFieldset.classList.add('not-valid');
@@ -254,8 +259,8 @@ form.addEventListener('submit', (e) => {
 
     //if credit card is selected vaildate card 
     if (creditCardOption.selected = true) {
+        
         //validate card number
-
         if(!validateCardNumber()) {
             e.preventDefault();
             validationFailed(cardNumberInput);
