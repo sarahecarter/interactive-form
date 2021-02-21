@@ -123,15 +123,16 @@ input {
 	margin-top: 5px;
 	margin-bottom: 5px;
 	background: rgb(255, 253, 249);
-	border: 1px solid rgba(36, 28, 21, 0.2);
+	border: 3px solid rgba(36, 28, 21, 0.2);
 	border-radius: 2px;
 	outline: none;
 }
 
 input:focus {
-  background: rgba(255, 255, 255, 1);
-  border-color:  rgb(9, 73, 250);
+  background: rgba(245, 215, 231);
+  border: 3px solid rgb(240, 89, 121);
 }
+
 
 input:-webkit-autofill {
   border: 1px solid rgba(36, 28, 21, 0.2);
@@ -161,7 +162,7 @@ select {
 	padding-right: calc(4% + 0.95em);
   background: url(../img/caret.png) calc(100% - 7px) 50% no-repeat rgb(255, 253, 249);
 	background-size: 12px auto;
-	border: 1px solid rgba(36, 28, 21, 0.2);
+	border: 3px solid rgba(36, 28, 21, 0.2);
 	border-radius: 2px;
 	outline: none;
   cursor: pointer;
@@ -169,9 +170,10 @@ select {
 }
 
 select:focus {
-  background: url(../img/caret.png) calc(100% - 7px) 50% no-repeat rgba(255, 255, 255, 1) !important;
+  background: url(../img/caret.png) calc(100% - 7px) 50% no-repeat rgba(245, 215, 231) !important;
   background-size: 12px auto !important;
-  border-color:  rgb(9, 73, 250);
+  border: 3px solid rgb(240, 89, 121);
+  
 }
 
 select:disabled {
@@ -202,6 +204,13 @@ button {
   border-bottom: 1px solid rgba(36, 28, 21, 0.3);
   box-shadow: none;
 	transition: all 0.3s ease-out;
+}
+
+button:focus {
+  text-shadow: 1px 1px 0 rgb(25, 25, 25, 0.9);
+  background: rgb(218, 174, 81);
+  border: 1px solid rgba(213, 51, 105, 0.3);
+  box-shadow: 1px 1px 25px rgba(213, 51, 105, 0.5) inset, 3px 3px 10px rgba(50, 50, 50, 0.3);
 }
 
 button:hover {
@@ -344,7 +353,7 @@ button:hover {
   margin-top: 10px;
   margin-bottom: 10px;
   border-radius: 3px;
-  border: 1px solid rgba(36, 28, 21, 0.2);
+  border: 3px solid rgba(36, 28, 21, 0.2);
   transition: all 0.3s ease-out;
 }
 
@@ -469,8 +478,8 @@ button:hover {
 ==================================== */
 
 .focus {
-  background: rgba(255, 255, 255, 1) !important;
-  border-color:  rgb(9, 73, 250) !important;
+  background: rgba(245, 215, 231) !important;
+  border: 3px solid rgb(240, 89, 121) !important;
 }
 
 .disabled {

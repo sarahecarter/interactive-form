@@ -172,7 +172,7 @@ paymentSelect.addEventListener('change', (e) => {
     }
 })
 
-// Helper Functions //
+//* Helper Functions *//
 function validateName () {
     let nameValue = nameInput.value;
     let nameTest = /[a-zA-Z]+\s[a-zA-Z]+|[a-zA-Z]+/gm.test(nameValue);
