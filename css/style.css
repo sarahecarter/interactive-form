@@ -29,7 +29,7 @@ header {
 	color: rgb(255, 255, 255);
 	width: 100%;
 	padding: 10px 0;
-	background: linear-gradient(90deg, rgba(213, 51, 105, 1) 0%, rgba(218, 174, 81, 1) 100%);
+	background: linear-gradient(90deg, rgba(75, 184, 176) 0%, rgba(71, 144, 214) 100%);
 }
 
 .header-container {
@@ -129,8 +129,8 @@ input {
 }
 
 input:focus {
-  background: rgba(245, 215, 231);
-  border: 3px solid rgb(240, 89, 121);
+  background: rgba(176, 211, 245);
+  border: 3px solid rgb(116, 180, 194);
 }
 
 
@@ -170,9 +170,9 @@ select {
 }
 
 select:focus {
-  background: url(../img/caret.png) calc(100% - 7px) 50% no-repeat rgba(245, 215, 231) !important;
+  background: url(../img/caret.png) calc(100% - 7px) 50% no-repeat rgba(176, 211, 245) !important;
   background-size: 12px auto !important;
-  border: 3px solid rgb(240, 89, 121);
+  border: 3px solid rgb(116, 180, 194);
   
 }
 
@@ -197,7 +197,7 @@ button {
   width: calc(100% - 40px);
   margin: 25px auto;
   padding: 10px 25px;
-	background: rgb(213, 51, 105);
+	background: rgb(75, 184, 176);
   border-radius: 4px;
   border: 3px solid transparent;
   border-right: 1px solid rgba(36, 28, 21, 0.2);
@@ -478,8 +478,8 @@ button:hover {
 ==================================== */
 
 .focus {
-  background: rgba(245, 215, 231) !important;
-  border: 3px solid rgb(240, 89, 121) !important;
+  background: rgba(176, 211, 245) !important;
+  border: 3px solid rgb(183, 217, 247) !important;
 }
 
 .disabled {

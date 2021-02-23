@@ -258,7 +258,7 @@ form.addEventListener('submit', (e) => {
     }
 
     //if credit card is selected vaildate card 
-    if (creditCardOption.selected = true) {
+    if (creditCardOption.selected) {
         
         //validate card number
         if(!validateCardNumber()) {
